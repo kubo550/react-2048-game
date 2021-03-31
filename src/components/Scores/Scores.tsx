@@ -16,7 +16,7 @@ const Scores: React.FC<ScoresProps> = ({ score, onClick }) => {
 
   useEffect(() => checkBestScore(), [checkBestScore]);
   return (
-    <S.ScoresBoard>
+    <S.ScoresBoard id='score'>
       <S.Header>
         <h1>2048</h1>
         <S.ScoreWrapper>

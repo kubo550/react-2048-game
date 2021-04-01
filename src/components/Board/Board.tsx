@@ -27,15 +27,16 @@ const dirs = Object.values(Arrows);
 const Board = () => {
   const [board, setBoard] = useState<BoardType>(initialBoard);
   const [score, setScore] = useState(0);
+  const [playable, setPlayable] = useState(true);
 
   useEffect(() => {
     document.addEventListener("keydown", handleArrowPress);
     return () => document.removeEventListener("keydown", handleArrowPress);
   }, []);
 
-  // const addScore = (score: number) => {
-  //   setScore(prev => score - prev);
-  // };
+  const addScore = (score: number) => {
+    setScore(prev => prev + score);
+  };
 
   const handleArrowPress = (event: KeyboardEvent): void => {
     if (!dirs.includes(event.key as Arrows)) {
@@ -47,7 +48,7 @@ const Board = () => {
       const newBoard = changed(prev, swapped) ? withNewValue(swapped) : prev;
 
       if (!hasPossibilities(newBoard)) {
-        console.log("game Over");
+        setPlayable(false);
       }
       return newBoard;
     });
@@ -56,6 +57,7 @@ const Board = () => {
   const handleNewGame = () => {
     setScore(0);
     setBoard(initialBoard);
+    setPlayable(true);
   };
 
   return (
@@ -67,6 +69,7 @@ const Board = () => {
           row.map((val, x) => <Tile key={x + y} value={val} />)
         )}
       </S.Board>
+      {!playable && <h1> Game Over </h1>}
     </S.Screen>
   );
 };

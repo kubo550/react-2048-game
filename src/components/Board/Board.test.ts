@@ -1,14 +1,7 @@
-import { matrixArray, slideValues } from "./Board.helper";
-import { BoardType } from "./Board.types";
+import { Arrows, BoardType } from "./Board.types";
+import { swap } from "./Board.helper"
 
-const fakeCallback = (score: number): void => console.log(score);
 
-const slide = {
-    right: (b: BoardType) => slideValues(b, true, fakeCallback),
-    left: (b: BoardType) => slideValues(b, false, fakeCallback),
-    down: (b: BoardType) => matrixArray(slideValues(matrixArray(b), true, fakeCallback)),
-    top: (b: BoardType) => matrixArray(slideValues(matrixArray(b), false, fakeCallback)),
-};
 
 // - UNIT TEST
 // - LVL 1 / 3
@@ -21,7 +14,7 @@ describe("Slide board with small number of values", () => {
         [16, 0, 0, 0],
     ];
     xit("Slides to right", () => {
-        const slidedRight = slide.right(initialBoard);
+        const slidedRight = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [0, 0, 0, 4],
             [0, 0, 0, 2],
@@ -32,7 +25,7 @@ describe("Slide board with small number of values", () => {
     });
 
     xit("Slides to left", () => {
-        const slidedRight = slide.left(initialBoard);
+        const slidedRight = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [4, 0, 0, 0],
             [2, 0, 0, 0],
@@ -43,7 +36,7 @@ describe("Slide board with small number of values", () => {
     });
 
     xit("Slides to down", () => {
-        const slidedRight = slide.down(initialBoard);
+        const slidedRight = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [0, 0, 0, 0],
             [0, 0, 0, 0],
@@ -54,7 +47,7 @@ describe("Slide board with small number of values", () => {
     });
 
     xit("Slides to top", () => {
-        const slidedRight = slide.top(initialBoard);
+        const slidedRight = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [16, 2, 8, 4],
             [0, 0, 0, 0],
@@ -75,7 +68,7 @@ describe("Swipe with single adding", () => {
         [4, 2, 0, 4],
     ];
     xit("Swipes to rgiht", () => {
-        const swiped = slide.right(initialBoard);
+        const swiped = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [0, 0, 4, 4],
             [0, 0, 0, 8],
@@ -86,7 +79,7 @@ describe("Swipe with single adding", () => {
     });
 
     xit("Swipes to left", () => {
-        const swiped = slide.left(initialBoard);
+        const swiped = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [4, 4, 0, 0],
             [8, 0, 0, 0],
@@ -97,7 +90,7 @@ describe("Swipe with single adding", () => {
     });
 
     xit("Swipes to down", () => {
-        const swiped = slide.down(initialBoard);
+        const swiped = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [0, 0, 0, 0],
             [0, 0, 0, 8],
@@ -108,7 +101,7 @@ describe("Swipe with single adding", () => {
     });
 
     xit("Swipes to top", () => {
-        const swiped = slide.top(initialBoard);
+        const swiped = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [2, 4, 2, 8],
             [8, 2, 0, 2],
@@ -130,7 +123,7 @@ describe("Swipe filed board with adding values", () => {
     ];
 
     xit("Swipes to right", () => {
-        const slided = slide.right(initialBoard);
+        const slided = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [0, 2, 4, 4],
             [0, 8, 2, 4],
@@ -141,7 +134,7 @@ describe("Swipe filed board with adding values", () => {
     });
 
     xit("Swipes to left", () => {
-        const slided = slide.left(initialBoard);
+        const slided = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [4, 2, 4, 0],
             [8, 4, 2, 0],
@@ -152,7 +145,7 @@ describe("Swipe filed board with adding values", () => {
     });
 
     xit("Swipes to down", () => {
-        const slided = slide.down(initialBoard);
+        const slided = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [0, 0, 0, 0],
             [2, 0, 4, 4],
@@ -162,7 +155,7 @@ describe("Swipe filed board with adding values", () => {
         expect(slided).not.toEqual(expected);
     });
     xit("Swipes to ", () => {
-        const slided = slide.top(initialBoard);
+        const slided = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [2, 4, 4, 4],
             [16, 32, 8, 2],
@@ -183,19 +176,19 @@ describe('Swipe with field board with no possibilities', () => {
     ]
 
     xit("The same after swipe right", () => {
-        const newBoard = slide.right(initialBoard);
+        const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
     xit("The same after swipe left", () => {
-        const newBoard = slide.left(initialBoard);
+        const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
     xit("The same after swipe down", () => {
-        const newBoard = slide.down(initialBoard);
+        const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
     xit("The same after swipe top", () => {
-        const newBoard = slide.top(initialBoard);
+        const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
 })

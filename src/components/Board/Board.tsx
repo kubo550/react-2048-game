@@ -3,17 +3,23 @@ import { useEffect, useState } from "react";
 // components
 import { Tile, Scores } from "..";
 // functions
-import { matrixArray, slideValues } from "./Board.helper";
+import {
+  withNewValue,
+  changed,
+  swap,
+  hasPossibilities,
+  countScore,
+} from "./Board.helper";
 // types
 import { Arrows, BoardType } from "./Board.types";
 // styles
 import * as S from "./Board.style";
 
 const initialBoard: BoardType = [
-  [0, 0, 0, 0],
-  [0, 2, 0, 0],
-  [0, 0, 2, 0],
-  [0, 0, 0, 0],
+  [2, 4, 8, 16],
+  [4, 2, 4, 8],
+  [8, 4, 2, 4],
+  [0, 8, 4, 2],
 ];
 
 const dirs = Object.values(Arrows);
@@ -27,24 +33,24 @@ const Board = () => {
     return () => document.removeEventListener("keydown", handleArrowPress);
   }, []);
 
-  const addScore = (score: number) => {
-    setScore(prev => prev + score);
-  };
-
-  // prettier-ignore
-  const swap = new Map<Arrows, () => void >([
-    [Arrows.ArrowRight, () => setBoard(prev => slideValues(prev, true, addScore))],
-    [Arrows.ArrowLeft, () => setBoard(prev => slideValues(prev, false, addScore))],
-    [Arrows.ArrowDown, () => setBoard(prev => matrixArray(slideValues(matrixArray(prev), true, addScore)))],
-    [Arrows.ArrowUp, () => setBoard(prev => matrixArray(slideValues(matrixArray(prev), false, addScore)))]
-  ])
+  // const addScore = (score: number) => {
+  //   setScore(prev => score - prev);
+  // };
 
   const handleArrowPress = (event: KeyboardEvent): void => {
     if (!dirs.includes(event.key as Arrows)) {
       return;
     }
 
-    swap.get(event.key as Arrows)!();
+    setBoard(prev => {
+      const swapped = swap.get(event.key as Arrows)!(prev);
+      const newBoard = changed(prev, swapped) ? withNewValue(swapped) : prev;
+
+      if (!hasPossibilities(newBoard)) {
+        console.log("game Over");
+      }
+      return newBoard;
+    });
   };
 
   const handleNewGame = () => {

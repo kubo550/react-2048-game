@@ -33,7 +33,7 @@ const Scores: React.FC<ScoresProps> = ({ score, onClick }) => {
       </S.Header>
       <S.Info>
         <p>Join the tiles, get to 2048!</p>
-        <button onClick={onClick}>New Game </button>
+        <S.Button onClick={onClick}>New Game </S.Button>
       </S.Info>
     </S.ScoresBoard>
   );

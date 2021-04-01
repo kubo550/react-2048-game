@@ -1,26 +1,20 @@
-// hooks
 import { useEffect, useState } from "react";
-// components
 import { Tile, Scores } from "..";
-// functions
 import {
   withNewValue,
-  changed,
+  hasChanged,
   swap,
   hasPossibilities,
   getInitialBoard,
 } from "./Board.helper";
-// types
 import { Arrows, BoardType } from "./Board.types";
-// styles
 import * as S from "./Board.style";
-
-const initialBoard: BoardType = getInitialBoard();
+import Alert from "./Alert/Alert";
 
 const dirs = Object.values(Arrows);
 
 const Board = () => {
-  const [board, setBoard] = useState<BoardType>(initialBoard);
+  const [board, setBoard] = useState<BoardType>(getInitialBoard());
   const [score, setScore] = useState(0);
   const [playable, setPlayable] = useState(true);
 
@@ -28,6 +22,12 @@ const Board = () => {
     document.addEventListener("keydown", handleArrowPress);
     return () => document.removeEventListener("keydown", handleArrowPress);
   }, []);
+
+  const handleNewGame = () => {
+    setScore(0);
+    setBoard(getInitialBoard());
+    setPlayable(true);
+  };
 
   const addScore = (score: number) => {
     setScore(prev => prev + score);
@@ -40,32 +40,27 @@ const Board = () => {
 
     setBoard(prev => {
       const swapped = swap.get(event.key as Arrows)!(prev, addScore);
-      const newBoard = changed(prev, swapped) ? withNewValue(swapped) : prev;
+      const board = hasChanged(prev, swapped) ? withNewValue(swapped) : prev;
 
-      if (!hasPossibilities(newBoard)) {
+      if (!hasPossibilities(board)) {
         setPlayable(false);
       }
-      return newBoard;
+
+      return board;
     });
   };
 
-  const handleNewGame = () => {
-    setScore(0);
-    setBoard(getInitialBoard());
-    setPlayable(true);
-  };
-
   return (
-    <S.Screen>
+    <>
       <Scores score={score} onClick={handleNewGame} />
-
+      <hr />
       <S.Board>
         {board.map((row, y) =>
           row.map((val, x) => <Tile key={x + y} value={val} />)
         )}
+        {!playable && <Alert onClick={handleNewGame} />}
       </S.Board>
-      {!playable && <h1> Game Over </h1>}
-    </S.Screen>
+    </>
   );
 };
 

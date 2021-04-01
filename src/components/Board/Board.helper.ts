@@ -59,12 +59,13 @@ export const hasPossibilities = (board: BoardType): Boolean => {
     return swipedBoards.some(b => changed(board, b))
 }
 
-export const countScore = (prevScore: number, board: BoardType) => {
-    // change to Array.reduce
-    let score = 0;
-    board.forEach(row => row.forEach(val => score += val))
-    return score - prevScore
-}
+
+export const getInitialBoard = () => {
+    const array = Array(4)
+        .fill(null)
+        .map(() => Array(4).fill(0)) as BoardType;
+    return withNewValue(withNewValue(array));
+};
 
 // prettier-ignore
 export const swap = new Map<Arrows, (board: BoardType, addScore?: (score: number) => void) => BoardType>([

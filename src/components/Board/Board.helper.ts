@@ -8,8 +8,12 @@ const getRandomSpot = (spots: Spot[]): Spot => {
 const matrixArray = (board: BoardType): BoardType =>
     board[0].map((_, colIndex) => board.map(row => row[colIndex])) as BoardType;
 
-const slideValues = (board: BoardType, forward: boolean, addScore?: (score: number) => void) => {
-    return board.map((row) => {
+const slideValues = (
+    board: BoardType,
+    forward: boolean,
+    addScore?: (score: number) => void
+) => {
+    return board.map(row => {
         let numbers = forward ? row.filter(Boolean) : row.filter(Boolean).reverse();
 
         if (numbers.length >= 2) {
@@ -18,22 +22,22 @@ const slideValues = (board: BoardType, forward: boolean, addScore?: (score: numb
                 if (numbers[i] === numbers[i - 1]) {
                     numbers[i] += numbers[i - 1];
                     numbers[i - 1] = 0;
-                    addScore && addScore(numbers[i])
+                    addScore && addScore(numbers[i]);
                 }
             }
         }
-        numbers = forward ? numbers.filter(Boolean) : numbers.filter(Boolean).reverse();
+        numbers = forward
+            ? numbers.filter(Boolean)
+            : numbers.filter(Boolean).reverse();
 
         const zeros = Array(4 - numbers.length).fill(0);
         const newBoard = forward ? [...zeros, ...numbers] : [...numbers, ...zeros];
 
         return newBoard as BoardRow;
     }) as BoardType;
-}
+};
 
-
-
-export const changed = (prev: BoardType, actual: BoardType) =>
+export const hasChanged = (prev: BoardType, actual: BoardType) =>
     prev.toString() !== actual.toString();
 
 export const withNewValue = (board: BoardType): BoardType => {
@@ -52,13 +56,11 @@ export const withNewValue = (board: BoardType): BoardType => {
     return board;
 };
 
-
 export const hasPossibilities = (board: BoardType): Boolean => {
-    const dirs = Object.values(Arrows)
-    const swipedBoards = dirs.map(dir => swap.get(dir)!(board))
-    return swipedBoards.some(b => changed(board, b))
-}
-
+    const dirs = Object.values(Arrows);
+    const swipedBoards = dirs.map(dir => swap.get(dir)!(board));
+    return swipedBoards.some(b => hasChanged(board, b));
+};
 
 export const getInitialBoard = () => {
     const array = Array(4)

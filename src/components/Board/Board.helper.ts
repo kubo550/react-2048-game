@@ -1,20 +1,14 @@
 import { BoardType, BoardRow, Spot, Arrows } from "./Board.types";
 
-// prettier-ignore
-export const swap = new Map<Arrows, (board: BoardType) => BoardType>([
-    [Arrows.ArrowRight, (prev: BoardType) => slideValues(prev, true)],
-    [Arrows.ArrowLeft, (prev: BoardType) => slideValues(prev, false)],
-    [Arrows.ArrowDown, (prev: BoardType) => matrixArray(slideValues(matrixArray(prev), true))],
-    [Arrows.ArrowUp, (prev: BoardType) => matrixArray(slideValues(matrixArray(prev), false))]
-]);
-
-export const changed = (prev: BoardType, actual: BoardType) =>
-    prev.toString() !== actual.toString();
+const getRandomSpot = (spots: Spot[]): Spot => {
+    const idx = Math.floor(Math.random() * spots.length);
+    return spots[idx];
+};
 
 const matrixArray = (board: BoardType): BoardType =>
     board[0].map((_, colIndex) => board.map(row => row[colIndex])) as BoardType;
 
-const slideValues = (board: BoardType, forward: boolean) => {
+const slideValues = (board: BoardType, forward: boolean, addScore?: (score: number) => void) => {
     return board.map((row) => {
         let numbers = forward ? row.filter(Boolean) : row.filter(Boolean).reverse();
 
@@ -24,6 +18,7 @@ const slideValues = (board: BoardType, forward: boolean) => {
                 if (numbers[i] === numbers[i - 1]) {
                     numbers[i] += numbers[i - 1];
                     numbers[i - 1] = 0;
+                    addScore && addScore(numbers[i])
                 }
             }
         }
@@ -37,10 +32,10 @@ const slideValues = (board: BoardType, forward: boolean) => {
 }
 
 
-const getRandomSpot = (spots: Spot[]): Spot => {
-    const idx = Math.floor(Math.random() * spots.length);
-    return spots[idx];
-};
+
+export const changed = (prev: BoardType, actual: BoardType) =>
+    prev.toString() !== actual.toString();
+
 export const withNewValue = (board: BoardType): BoardType => {
     const freeSpots: Spot[] = [];
 
@@ -57,9 +52,6 @@ export const withNewValue = (board: BoardType): BoardType => {
     return board;
 };
 
-export const isFreeSpot = (b: BoardType): Boolean => {
-    return b.some(row => row.some(cell => cell === 0))
-}
 
 export const hasPossibilities = (board: BoardType): Boolean => {
     const dirs = Object.values(Arrows)
@@ -71,5 +63,13 @@ export const countScore = (prevScore: number, board: BoardType) => {
     // change to Array.reduce
     let score = 0;
     board.forEach(row => row.forEach(val => score += val))
-    return score
+    return score - prevScore
 }
+
+// prettier-ignore
+export const swap = new Map<Arrows, (board: BoardType, addScore?: (score: number) => void) => BoardType>([
+    [Arrows.ArrowRight, (prev: BoardType, addScore) => slideValues(prev, true, addScore)],
+    [Arrows.ArrowLeft, (prev: BoardType, addScore) => slideValues(prev, false, addScore)],
+    [Arrows.ArrowDown, (prev: BoardType, addScore) => matrixArray(slideValues(matrixArray(prev), true, addScore))],
+    [Arrows.ArrowUp, (prev: BoardType, addScore) => matrixArray(slideValues(matrixArray(prev), false, addScore))]
+]);

@@ -47,16 +47,20 @@ export const Info = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0 0 20px; 
+    color: #776e65;
+    font-weight: 600;
 
-    button {
-       background-color: #8f7a66;
-       border-radius: 5px;
-       outline: none;
-       border: none;
-       padding: 2px 25px;
-       color: white;
-       letter-spacing: 1.5px;
-       font-weight: 700;
-       cursor: pointer;
-    }
+    
 `
+export const Button = styled.button`
+  background-color: #8f7a66;
+  height: 50px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  padding: 2px 25px;
+  color: white;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  cursor: pointer;  
+`;

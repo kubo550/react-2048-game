@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    width: 530px;
-    margin: 20px auto;
+    width: 100%;
+    margin: 10px auto;
 
     p {
         color: #776e65;   
@@ -11,6 +11,6 @@ export const Wrapper = styled.div`
 
     a {
         color: #776e65;
-        font-size: 1.5rem;  
+        font-size: 1.3rem;  
     }
 `

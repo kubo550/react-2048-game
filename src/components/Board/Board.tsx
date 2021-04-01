@@ -8,19 +8,14 @@ import {
   changed,
   swap,
   hasPossibilities,
-  countScore,
+  getInitialBoard,
 } from "./Board.helper";
 // types
 import { Arrows, BoardType } from "./Board.types";
 // styles
 import * as S from "./Board.style";
 
-const initialBoard: BoardType = [
-  [2, 4, 8, 16],
-  [4, 2, 4, 8],
-  [8, 4, 2, 4],
-  [0, 8, 4, 2],
-];
+const initialBoard: BoardType = getInitialBoard();
 
 const dirs = Object.values(Arrows);
 
@@ -56,7 +51,7 @@ const Board = () => {
 
   const handleNewGame = () => {
     setScore(0);
-    setBoard(initialBoard);
+    setBoard(getInitialBoard());
     setPlayable(true);
   };
 

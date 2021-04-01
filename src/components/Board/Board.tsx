@@ -44,7 +44,7 @@ const Board = () => {
     }
 
     setBoard(prev => {
-      const swapped = swap.get(event.key as Arrows)!(prev);
+      const swapped = swap.get(event.key as Arrows)!(prev, addScore);
       const newBoard = changed(prev, swapped) ? withNewValue(swapped) : prev;
 
       if (!hasPossibilities(newBoard)) {

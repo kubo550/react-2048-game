@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Tile, Scores } from "..";
+import { Tile, Scores } from "@components";
 import {
   withNewValue,
   hasChanged,

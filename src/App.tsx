@@ -1,4 +1,4 @@
-import { About, Board, Help } from "./components";
+import { About, Board, Help } from "@components";
 import styled from "styled-components";
 
 const Screen = styled.div`
@@ -11,13 +11,19 @@ const Screen = styled.div`
   align-items: center;
 `;
 
+const Hr = styled.div`
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #776e65;
+`;
+
 const App = () => (
-  // Todo Create own HR
   <Screen>
     <Board />
-    <hr />
+    <Hr />
     <Help />
-    <hr />
+    <Hr />
     <About />
   </Screen>
 );

@@ -10,7 +10,7 @@ describe("Swipe filed board with adding values", () => {
         [16, 16, 2, 8],
     ];
 
-    it("Swipes to right", () => {
+    xit("Swipes to right", () => {
         const slided = swap.get(Arrows.ArrowRight)!(initialBoard);
         const expected: BoardType = [
             [0, 2, 4, 4],
@@ -21,7 +21,7 @@ describe("Swipe filed board with adding values", () => {
         expect(slided).toEqual(expected);
     });
 
-    it("Swipes to left", () => {
+    xit("Swipes to left", () => {
         const slided = swap.get(Arrows.ArrowLeft)!(initialBoard);
         const expected: BoardType = [
             [4, 2, 4, 0],
@@ -32,7 +32,7 @@ describe("Swipe filed board with adding values", () => {
         expect(slided).toEqual(expected);
     });
 
-    it("Swipes to down", () => {
+    xit("Swipes to down", () => {
         const slided = swap.get(Arrows.ArrowDown)!(initialBoard);
         const expected: BoardType = [
             [0, 0, 0, 0],
@@ -42,7 +42,7 @@ describe("Swipe filed board with adding values", () => {
         ];
         expect(slided).toEqual(expected);
     });
-    it("Swipes to top", () => {
+    xit("Swipes to top", () => {
         const slided = swap.get(Arrows.ArrowUp)!(initialBoard);
         const expected: BoardType = [
             [2, 4, 4, 4],
@@ -63,19 +63,19 @@ describe('Swipe with field board with no possibilities', () => {
         [16, 2, 4, 8],
     ]
 
-    it("The same after swipe right", () => {
+    xit("The same after swipe right", () => {
         const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
-    it("The same after swipe left", () => {
+    xit("The same after swipe left", () => {
         const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
-    it("The same after swipe down", () => {
+    xit("The same after swipe down", () => {
         const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
-    it("The same after swipe top", () => {
+    xit("The same after swipe top", () => {
         const newBoard = swap.get(Arrows.ArrowLeft)!(initialBoard);
         expect(newBoard).toEqual(initialBoard)
     });
@@ -83,7 +83,7 @@ describe('Swipe with field board with no possibilities', () => {
 
 describe('Testing other functions', () => {
 
-    it("hasChanged function with change", () => {
+    xit("hasChanged function with change", () => {
         const initialBoard: BoardType = [
             [0, 0, 0, 4],
             [0, 0, 0, 2],
@@ -94,7 +94,7 @@ describe('Testing other functions', () => {
         expect(hasChanged(initialBoard, swapped)).toBeTruthy()
     });
 
-    it("hasChanged function with no change", () => {
+    xit("hasChanged function with no change", () => {
         const initialBoard: BoardType = [
             [0, 0, 0, 4],
             [0, 0, 0, 2],
@@ -105,7 +105,7 @@ describe('Testing other functions', () => {
         expect(hasChanged(initialBoard, swapped)).toBeFalsy()
     });
 
-    it("hasPossibilities function with possibilities", () => {
+    xit("hasPossibilities function with possibilities", () => {
         const initialBoard: BoardType = [
             [2, 0, 8, 16],
             [0, 2, 0, 8],
@@ -116,7 +116,7 @@ describe('Testing other functions', () => {
     });
 
 
-    it("hasPossibilities function with no possibilities", () => {
+    xit("hasPossibilities function with no possibilities", () => {
         const initialBoard: BoardType = [
             [2, 4, 8, 16],
             [4, 2, 4, 8],

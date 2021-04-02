@@ -1,4 +1,4 @@
-import { About, Board, Help } from "@components";
+import { About, Board, Help } from "./components";
 import styled from "styled-components";
 
 const Screen = styled.div`
@@ -16,6 +16,7 @@ const Hr = styled.div`
   height: 2px;
   border-radius: 2px;
   background-color: #776e65;
+  margin: 20px 0 5px;
 `;
 
 const App = () => (

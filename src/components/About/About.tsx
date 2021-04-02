@@ -11,21 +11,33 @@ const About = () => (
     </p>
 
     <div>
-      <a target='_blank' href='https://www.facebook.com/powerty2'>
+      <a
+        target='_blank'
+        rel='noreferrer'
+        href='https://www.facebook.com/powerty2'
+      >
         <img
           src='https://img.icons8.com/bubbles/50/000000/facebook-new.png'
           alt='Facebook'
         />
       </a>
 
-      <a target='_blank' href='https://www.instagram.com/__kurdziel/'>
+      <a
+        target='_blank'
+        rel='noreferrer'
+        href='https://www.instagram.com/__kurdziel/'
+      >
         <img
           src='https://img.icons8.com/bubbles/50/000000/instagram.png'
           alt='Instagram'
         />
       </a>
 
-      <a target='_blank' href='https://www.messenger.com/t/100005543894347'>
+      <a
+        target='_blank'
+        rel='noreferrer'
+        href='https://www.messenger.com/t/100005543894347'
+      >
         <img
           src='https://img.icons8.com/bubbles/50/000000/facebook-messenger.png'
           alt='Messenger'

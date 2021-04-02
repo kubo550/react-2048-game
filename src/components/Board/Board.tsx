@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Tile, Scores } from "..";
 import {
   withNewValue,
@@ -33,7 +33,7 @@ const Board = () => {
     setScore(prev => prev + score);
   };
 
-  const handleArrowPress = (event: KeyboardEvent): void => {
+  const handleArrowPress = useCallback((event: KeyboardEvent): void => {
     if (!dirs.includes(event.key as Arrows)) {
       return;
     }
@@ -48,7 +48,7 @@ const Board = () => {
 
       return board;
     });
-  };
+  }, []);
 
   return (
     <>

@@ -6,3 +6,19 @@
  ## Online Preview
  
  Previev on github pages [kubo550.github.io/react-2048-game/](https://kubo550.github.io/react-2048-game/)
+
+## Tech Stack
+
+
+![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=react)&nbsp;
+![TypeScript](https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript)&nbsp;
+
+### Styles
+
+![SCSS](https://img.shields.io/badge/-SCSS-05122A?style=flat&logo=SASS)&nbsp;
+![Styled Components](https://img.shields.io/badge/-styled_components-05122A?style=flat&logo=styled-components)&nbsp;
+
+Also in project: 
+
+* Framer Motion 
+

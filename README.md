@@ -16,6 +16,8 @@
 ![SCSS](https://img.shields.io/badge/-SCSS-05122A?style=flat&logo=SASS)&nbsp;
 ![Styled Components](https://img.shields.io/badge/-styled_components-05122A?style=flat&logo=styled-components)&nbsp;
 
+![Jest](https://img.shields.io/badge/-jest-05122A?&style=flat&logo=jest)
+
 Also in project: 
 
 * Framer Motion 

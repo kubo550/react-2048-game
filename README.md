@@ -7,6 +7,8 @@
  
  Previev on github pages [kubo550.github.io/react-2048-game/](https://kubo550.github.io/react-2048-game/)
 
+ ![Preview](https://raw.githubusercontent.com/kubo550/react-2048-game/master/preview.png)
+
 ## Tech Stack
 
 
